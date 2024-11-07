@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GestorProcess"
+             targetNamespace="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess"
+             xmlns:ns1="http://www.gestor.org"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                  xmlns:xocffe="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://www.gestor.org" schemaLocation="../Schemas/Gestor.xsd" />
+		</schema>
+	</wsdl:types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<wsdl:message name="GestorProcessRequestMessage">
+		<wsdl:part name="payload" element="ns1:process" />
+	</wsdl:message>
+	<wsdl:message name="GestorProcessResponseMessage">
+		<wsdl:part name="payload" element="ns1:processResponse" />
+	</wsdl:message>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<!-- portType implemented by the GestorProcess BPEL process -->
+	<wsdl:portType name="GestorProcess">
+		<wsdl:operation name="process">
+			<wsdl:input  message="client:GestorProcessRequestMessage" />
+			<wsdl:output message="client:GestorProcessResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="GestorProcess">
+		<plnk:role name="GestorProcessProvider" portType="client:GestorProcess"/>
+	</plnk:partnerLinkType>
+ <wsdl:import location="EmpleadoProcess.wsdl"
+              namespace="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess"/>
+</wsdl:definitions>
