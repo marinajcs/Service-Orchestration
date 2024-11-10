@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
     <dgm:gService name="gestorprocess_client_ep">
-        <dgm:body borderWidth="2" arcRad="20" X="21" Y="389" width="137" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="262" width="137" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="11" Y="382" width="156" height="98">
+        <dgm:shadow arcRad="20" X="11" Y="255" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:outputPort name="gestorprocess_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess#wsdl.interface(GestorProcess)"/>
@@ -15,11 +15,11 @@
         </dgm:operations>
     </dgm:gService>
     <dgm:gService name="empleadoprocess_client_ep">
-        <dgm:body borderWidth="2" arcRad="20" X="21" Y="273" width="137" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="26" width="137" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="11" Y="266" width="156" height="98">
+        <dgm:shadow arcRad="20" X="11" Y="19" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:outputPort name="empleadoprocess_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess#wsdl.interface(EmpleadoProcess)"/>
@@ -29,11 +29,11 @@
         </dgm:operations>
     </dgm:gService>
     <dgm:gService name="iberiaprocess_client_ep">
-        <dgm:body borderWidth="2" arcRad="20" X="21" Y="157" width="137" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="144" width="137" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="11" Y="150" width="156" height="98">
+        <dgm:shadow arcRad="20" X="11" Y="137" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:outputPort name="iberiaprocess_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/IberiaProcess#wsdl.interface(IberiaProcess)"/>
@@ -43,11 +43,11 @@
         </dgm:operations>
     </dgm:gService>
     <dgm:gService name="vuelingprocess_client_ep">
-        <dgm:body borderWidth="2" arcRad="20" X="21" Y="41" width="137" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="380" width="137" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="11" Y="34" width="156" height="98">
+        <dgm:shadow arcRad="20" X="11" Y="373" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:outputPort name="vuelingprocess_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess#wsdl.interface(VuelingProcess)"/>
@@ -57,70 +57,102 @@
         </dgm:operations>
     </dgm:gService>
     <dgm:gComponent name="GestorProcess">
-        <dgm:body borderWidth="2" arcRad="20" X="226" Y="374" width="130" height="61">
+        <dgm:body borderWidth="2" arcRad="20" X="226" Y="201" width="130" height="111">
             <dgm:borderColor r="69" g="113" b="140"/>
             <dgm:lightBgColor r="166" g="208" b="230"/>
             <dgm:darkBgColor r="99" g="162" b="201"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="216" Y="367" width="150" height="77">
+        <dgm:shadow arcRad="20" X="216" Y="194" width="150" height="127">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="gestorprocess_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess#wsdl.interface(GestorProcess)"/>
+        <dgm:outputPort name="empleado_client" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess#wsdl.interface(EmpleadoProcess)"/>
+        <dgm:outputPort name="iberia_client" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/IberiaProcess#wsdl.interface(IberiaProcess)"/>
+        <dgm:outputPort name="vueling_client" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess#wsdl.interface(VuelingProcess)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
     </dgm:gComponent>
     <dgm:gComponent name="EmpleadoProcess">
-        <dgm:body borderWidth="2" arcRad="20" X="226" Y="258" width="130" height="61">
+        <dgm:body borderWidth="2" arcRad="20" X="454" Y="111" width="130" height="61">
             <dgm:borderColor r="69" g="113" b="140"/>
             <dgm:lightBgColor r="166" g="208" b="230"/>
             <dgm:darkBgColor r="99" g="162" b="201"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="216" Y="251" width="150" height="77">
+        <dgm:shadow arcRad="20" X="444" Y="104" width="150" height="77">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="empleadoprocess_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess#wsdl.interface(EmpleadoProcess)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
     </dgm:gComponent>
     <dgm:gComponent name="IberiaProcess">
-        <dgm:body borderWidth="2" arcRad="20" X="226" Y="142" width="130" height="61">
+        <dgm:body borderWidth="2" arcRad="20" X="454" Y="206" width="130" height="61">
             <dgm:borderColor r="69" g="113" b="140"/>
             <dgm:lightBgColor r="166" g="208" b="230"/>
             <dgm:darkBgColor r="99" g="162" b="201"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="216" Y="135" width="150" height="77">
+        <dgm:shadow arcRad="20" X="444" Y="199" width="150" height="77">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="iberiaprocess_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/IberiaProcess#wsdl.interface(IberiaProcess)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
     </dgm:gComponent>
     <dgm:gComponent name="VuelingProcess">
-        <dgm:body borderWidth="2" arcRad="20" X="226" Y="26" width="130" height="61">
+        <dgm:body borderWidth="2" arcRad="20" X="454" Y="309" width="130" height="61">
             <dgm:borderColor r="69" g="113" b="140"/>
             <dgm:lightBgColor r="166" g="208" b="230"/>
             <dgm:darkBgColor r="99" g="162" b="201"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="216" Y="19" width="150" height="77">
+        <dgm:shadow arcRad="20" X="444" Y="302" width="150" height="77">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="vuelingprocess_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess#wsdl.interface(VuelingProcess)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
     </dgm:gComponent>
     <dgm:gWireLink source="gestorprocess_client_ep" target="GestorProcess/gestorprocess_client" width="2">
-        <dgm:gSegment X1="168" Y1="399" X2="216" Y2="399"/>
+        <dgm:gSegment X1="168" Y1="272" X2="192" Y2="272"/>
+        <dgm:gSegment X1="192" Y1="272" X2="192" Y2="226"/>
+        <dgm:gSegment X1="192" Y1="226" X2="216" Y2="226"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
     <dgm:gWireLink source="empleadoprocess_client_ep" target="EmpleadoProcess/empleadoprocess_client" width="2">
-        <dgm:gSegment X1="168" Y1="283" X2="216" Y2="283"/>
+        <dgm:gSegment X1="168" Y1="36" X2="405" Y2="36"/>
+        <dgm:gSegment X1="405" Y1="36" X2="405" Y2="136"/>
+        <dgm:gSegment X1="405" Y1="136" X2="444" Y2="136"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
     <dgm:gWireLink source="iberiaprocess_client_ep" target="IberiaProcess/iberiaprocess_client" width="2">
-        <dgm:gSegment X1="168" Y1="167" X2="216" Y2="167"/>
+        <dgm:gSegment X1="168" Y1="154" X2="420" Y2="154"/>
+        <dgm:gSegment X1="420" Y1="154" X2="420" Y2="231"/>
+        <dgm:gSegment X1="420" Y1="231" X2="444" Y2="231"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
     <dgm:gWireLink source="vuelingprocess_client_ep" target="VuelingProcess/vuelingprocess_client" width="2">
-        <dgm:gSegment X1="168" Y1="51" X2="216" Y2="51"/>
+        <dgm:gSegment X1="168" Y1="390" X2="390" Y2="390"/>
+        <dgm:gSegment X1="390" Y1="390" X2="390" Y2="334"/>
+        <dgm:gSegment X1="390" Y1="334" X2="444" Y2="334"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GestorProcess/empleado_client" target="EmpleadoProcess/empleadoprocess_client" width="2">
+        <dgm:gSegment X1="366" Y1="226" X2="390" Y2="226"/>
+        <dgm:gSegment X1="390" Y1="226" X2="390" Y2="136"/>
+        <dgm:gSegment X1="390" Y1="136" X2="444" Y2="136"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GestorProcess/iberia_client" target="IberiaProcess/iberiaprocess_client" width="2">
+        <dgm:gSegment X1="366" Y1="251" X2="405" Y2="251"/>
+        <dgm:gSegment X1="405" Y1="251" X2="405" Y2="231"/>
+        <dgm:gSegment X1="405" Y1="231" X2="444" Y2="231"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="GestorProcess/vueling_client" target="VuelingProcess/vuelingprocess_client" width="2">
+        <dgm:gSegment X1="366" Y1="276" X2="405" Y2="276"/>
+        <dgm:gSegment X1="405" Y1="276" X2="405" Y2="334"/>
+        <dgm:gSegment X1="405" Y1="334" X2="444" Y2="334"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>

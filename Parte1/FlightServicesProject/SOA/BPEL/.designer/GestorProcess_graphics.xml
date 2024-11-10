@@ -4,9 +4,12 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="gestorprocess_client" x="0" y="139" side="left"/>
+      <partnerlink name="gestorprocess_client" x="0" y="574" side="left"/>
+      <partnerlink name="iberia_client" x="0" y="476" side="left"/>
+      <partnerlink name="empleado_client" x="529" y="284" side="right"/>
+      <partnerlink name="vueling_client" x="529" y="668" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,75,707,174" show_swimlanes="true">
+   <graph_layout viewport="95,788,495,269" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
    </graph_layout>

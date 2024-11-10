@@ -52,6 +52,15 @@
         <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess#wsdl.interface(GestorProcess)"
                         xml:id="id_20"/>
       </service>
+      <reference name="empleado_client" ui:wsdlLocation="WSDLs/EmpleadoProcess.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess#wsdl.interface(EmpleadoProcess)"/>
+      </reference>
+      <reference name="iberia_client" ui:wsdlLocation="WSDLs/IberiaProcess.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/IberiaProcess#wsdl.interface(IberiaProcess)"/>
+      </reference>
+      <reference name="vueling_client" ui:wsdlLocation="WSDLs/VuelingProcess.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess#wsdl.interface(VuelingProcess)"/>
+      </reference>
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false" xml:id="id_23">required</property>
   </component>
@@ -99,6 +108,18 @@
   </wire>
   <wire>
     <source.uri>vuelingprocess_client_ep</source.uri>
+    <target.uri>VuelingProcess/vuelingprocess_client</target.uri>
+  </wire>
+  <wire>
+    <source.uri>GestorProcess/empleado_client</source.uri>
+    <target.uri>EmpleadoProcess/empleadoprocess_client</target.uri>
+  </wire>
+  <wire>
+    <source.uri>GestorProcess/iberia_client</source.uri>
+    <target.uri>IberiaProcess/iberiaprocess_client</target.uri>
+  </wire>
+  <wire>
+    <source.uri>GestorProcess/vueling_client</source.uri>
     <target.uri>VuelingProcess/vuelingprocess_client</target.uri>
   </wire>
 </composite>
