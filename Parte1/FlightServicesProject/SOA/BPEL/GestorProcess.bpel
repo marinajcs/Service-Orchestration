@@ -1,0 +1,75 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Nov 06 12:05:53 CET 2024
+  Author:  marin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="GestorProcess"
+               targetNamespace="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns1="http://www.gestor.org"
+         xmlns:ns2="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess" xml:id="id_1"
+         xmlns:ns3="http://www.empleado.org"
+         xmlns:ns4="http://xmlns.oracle.com/FlightServices/FlightServicesProject/IberiaProcess">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess" location="../WSDLs/GestorProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+            xml:id="id_2"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks xml:id="id_3">
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="gestorprocess_client" partnerLinkType="client:GestorProcess" myRole="GestorProcessProvider"
+                 xml:id="id_4"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables xml:id="id_6">
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:GestorProcessRequestMessage" xml:id="id_7"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:GestorProcessResponseMessage" xml:id="id_8"/>
+    <variable name="tipo_empleado_process_InputVariable" messageType="ns2:EmpleadoProcessRequestMessage"
+              xml:id="id_18"/>
+    <variable name="iberia_process_InputVariable" messageType="ns4:IberiaProcessRequestMessage" xml:id="id_19"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" xml:id="id_9">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in GestorProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="gestorprocess_client" portType="client:GestorProcess" operation="process" variable="inputVariable" createInstance="yes"
+             xml:id="id_10"/>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="gestorprocess_client" portType="client:GestorProcess" operation="process" variable="outputVariable"
+           xml:id="id_15"/>
+  </sequence>
+</process>
