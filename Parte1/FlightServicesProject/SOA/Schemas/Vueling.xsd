@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.vueling.org"
+            targetNamespace="http://www.vueling.org" elementFormDefault="qualified">
+  <xsd:element name="process">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="tipo_empleado" type="xsd:string"/>
+        <xsd:element name="fecha_inicio" type="xsd:date"/>
+        <xsd:element name="fecha_fin" type="xsd:date"/>
+        <xsd:element name="tipo_aeropuerto" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="processResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="precio" type="xsd:float"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
