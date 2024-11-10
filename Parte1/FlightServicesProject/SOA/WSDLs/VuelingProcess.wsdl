@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="VuelingProcess"
+             targetNamespace="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess"
+             xmlns:ns1="http://www.vueling.org"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://www.vueling.org" schemaLocation="../Schemas/Vueling.xsd" />
+		</schema>
+	</wsdl:types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<wsdl:message name="VuelingProcessRequestMessage">
+		<wsdl:part name="payload" element="ns1:process" />
+	</wsdl:message>
+
+	<wsdl:message name="VuelingProcessResponseMessage">
+		<wsdl:part name="payload" element="ns1:processResponse" />
+	</wsdl:message>
+
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- portType implemented by the VuelingProcess BPEL process -->
+	<wsdl:portType name="VuelingProcess">
+  <wsdl:operation name="process">
+   <wsdl:input message="client:VuelingProcessRequestMessage"/>
+   <wsdl:output message="client:VuelingProcessResponseMessage"/>
+  </wsdl:operation>
+ </wsdl:portType>
+
+	<!-- portType implemented by the requester of VuelingProcess BPEL process
+	for asynchronous callback purposes
+	-->
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	the VuelingProcess partnerLinkType binds the provider and
+	requester portType into an asynchronous conversation.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<plnk:partnerLinkType name="VuelingProcess">
+		<plnk:role name="VuelingProcessProvider" portType="client:VuelingProcess"/>
+	</plnk:partnerLinkType>
+</wsdl:definitions>

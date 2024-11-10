@@ -6,7 +6,7 @@
    <partnerlink_locations>
       <partnerlink name="empleadoprocess_client" x="0" y="286" side="left"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,330,577,301" show_swimlanes="true">
+   <graph_layout viewport="0,150,652,291" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
    </graph_layout>

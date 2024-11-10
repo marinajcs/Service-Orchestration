@@ -10,13 +10,15 @@
            xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
            xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"
            xmlns:ui="http://xmlns.oracle.com/soa/designer/"
-           xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext" xml:id="id_1" ui:customizable="true">
+           xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext" xml:id="id_1" ui:customizable="false">
   <import namespace="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess"
           location="WSDLs/GestorProcess.wsdl" importType="wsdl" xml:id="id_2"/>
   <import namespace="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess"
           location="WSDLs/EmpleadoProcess.wsdl" importType="wsdl" xml:id="id_3"/>
   <import namespace="http://xmlns.oracle.com/FlightServices/FlightServicesProject/IberiaProcess"
           location="WSDLs/IberiaProcess.wsdl" importType="wsdl" xml:id="id_4"/>
+  <import namespace="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess"
+          location="WSDLs/VuelingProcess.wsdl" importType="wsdl" xml:id="id_50"/>
   <service name="gestorprocess_client_ep" ui:wsdlLocation="WSDLs/GestorProcess.wsdl" xml:id="id_5">
     <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess#wsdl.interface(GestorProcess)"
                     xml:id="id_6"/>
@@ -34,6 +36,12 @@
                     xml:id="id_12"/>
     <binding.ws port="http://xmlns.oracle.com/FlightServices/FlightServicesProject/IberiaProcess#wsdl.endpoint(iberiaprocess_client_ep/IberiaProcess_pt)"
                 xml:id="id_13"/>
+  </service>
+  <service name="vuelingprocess_client_ep" ui:wsdlLocation="WSDLs/VuelingProcess.wsdl" xml:id="id_51">
+    <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess#wsdl.interface(VuelingProcess)"
+                    xml:id="id_52"/>
+    <binding.ws port="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess#wsdl.endpoint(vuelingprocess_client_ep/VuelingProcess_pt)"
+                xml:id="id_53"/>
   </service>
   <property name="productVersion" type="xs:string" many="false" xml:id="id_14">12.2.1.4.0.190828</property>
   <property name="compositeID" type="xs:string" many="false" xml:id="id_15">e7a8a897-a9a8-4cd8-a267-0baf9ec443ac</property>
@@ -67,6 +75,16 @@
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false" xml:id="id_35">required</property>
   </component>
+  <component name="VuelingProcess" xml:id="id_45" version="2.0">
+    <implementation.bpel src="BPEL/VuelingProcess.bpel" xml:id="id_46"/>
+    <componentType xml:id="id_47">
+      <service name="vuelingprocess_client" ui:wsdlLocation="WSDLs/VuelingProcess.wsdl" xml:id="id_48">
+        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess#wsdl.interface(VuelingProcess)"
+                        xml:id="id_49"/>
+      </service>
+    </componentType>
+    <property name="bpel.config.oneWayDeliveryPolicy" type="xs:string" many="false" xml:id="id_59">async.persist</property>
+  </component>
   <wire xml:id="id_36">
     <source.uri xml:id="id_37">gestorprocess_client_ep</source.uri>
     <target.uri xml:id="id_38">GestorProcess/gestorprocess_client</target.uri>
@@ -78,5 +96,9 @@
   <wire xml:id="id_42">
     <source.uri xml:id="id_43">iberiaprocess_client_ep</source.uri>
     <target.uri xml:id="id_44">IberiaProcess/iberiaprocess_client</target.uri>
+  </wire>
+  <wire>
+    <source.uri>vuelingprocess_client_ep</source.uri>
+    <target.uri>VuelingProcess/vuelingprocess_client</target.uri>
   </wire>
 </composite>

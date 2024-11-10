@@ -74,7 +74,7 @@
              xml:id="id_9"/>
     <if name="fecha_valid" xml:id="id_10">
       <documentation xml:id="id_46">
-        <![CDATA[fecha_valid]]>
+        <![CDATA[fecha_inicio <= fecha_final]]>
       </documentation>
       <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_11">$inputVariable.payload/ns1:fecha_fin&gt;=$inputVariable.payload/ns1:fecha_inicio</condition>
       <sequence name="Sequence1" xml:id="id_12">
@@ -91,9 +91,9 @@
           </assign>
           <else xml:id="id_19">
             <documentation xml:id="id_55">
-              <![CDATA[turista]]>
+              <![CDATA[tourist]]>
             </documentation>
-            <assign name="AssignTuristPrice" xml:id="id_20">
+            <assign name="AssignTouristPrice" xml:id="id_20">
               <copy xml:id="id_21">
                 <from xml:id="id_22">10 * 5</from>
                 <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_23">$outputVariable.payload/ns1:precio</to>
@@ -138,7 +138,7 @@
         </if>
       </sequence>
       <else xml:id="id_43">
-        <throw name="err_fecha" faultName="bpel:invalidVariables" xml:id="id_44"/>
+        <throw name="err_fecha" faultName="bpel:invalidVariables" xml:id="id_44" faultVariable="inputVariable"/>
       </else>
     </if>
     <!-- Generate reply to synchronous request -->
