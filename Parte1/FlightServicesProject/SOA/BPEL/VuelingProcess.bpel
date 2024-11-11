@@ -91,6 +91,10 @@
                 <from xml:id="id_28">10 * 4</from>
                 <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_29">$outputVariable.payload/ns1:precio</to>
               </copy>
+              <copy xml:id="id_53">
+                <from xml:id="id_54">'tourist'</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_55">$inputVariable.payload/ns1:tipo_empleado</to>
+              </copy>
             </assign>
           </else>
         </if>

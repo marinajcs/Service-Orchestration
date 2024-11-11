@@ -52,14 +52,17 @@
         <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/GestorProcess#wsdl.interface(GestorProcess)"
                         xml:id="id_20"/>
       </service>
-      <reference name="empleado_client" ui:wsdlLocation="WSDLs/EmpleadoProcess.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess#wsdl.interface(EmpleadoProcess)"/>
+      <reference name="empleado_client" ui:wsdlLocation="WSDLs/EmpleadoProcess.wsdl" xml:id="id_60">
+        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/EmpleadoProcess#wsdl.interface(EmpleadoProcess)"
+                        xml:id="id_61"/>
       </reference>
-      <reference name="iberia_client" ui:wsdlLocation="WSDLs/IberiaProcess.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/IberiaProcess#wsdl.interface(IberiaProcess)"/>
+      <reference name="iberia_client" ui:wsdlLocation="WSDLs/IberiaProcess.wsdl" xml:id="id_62">
+        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/IberiaProcess#wsdl.interface(IberiaProcess)"
+                        xml:id="id_63"/>
       </reference>
-      <reference name="vueling_client" ui:wsdlLocation="WSDLs/VuelingProcess.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess#wsdl.interface(VuelingProcess)"/>
+      <reference name="vueling_client" ui:wsdlLocation="WSDLs/VuelingProcess.wsdl" xml:id="id_64">
+        <interface.wsdl interface="http://xmlns.oracle.com/FlightServices/FlightServicesProject/VuelingProcess#wsdl.interface(VuelingProcess)"
+                        xml:id="id_65"/>
       </reference>
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false" xml:id="id_23">required</property>
@@ -106,20 +109,20 @@
     <source.uri xml:id="id_43">iberiaprocess_client_ep</source.uri>
     <target.uri xml:id="id_44">IberiaProcess/iberiaprocess_client</target.uri>
   </wire>
-  <wire>
-    <source.uri>vuelingprocess_client_ep</source.uri>
-    <target.uri>VuelingProcess/vuelingprocess_client</target.uri>
+  <wire xml:id="id_66">
+    <source.uri xml:id="id_67">vuelingprocess_client_ep</source.uri>
+    <target.uri xml:id="id_68">VuelingProcess/vuelingprocess_client</target.uri>
   </wire>
-  <wire>
-    <source.uri>GestorProcess/empleado_client</source.uri>
-    <target.uri>EmpleadoProcess/empleadoprocess_client</target.uri>
+  <wire xml:id="id_69">
+    <source.uri xml:id="id_70">GestorProcess/empleado_client</source.uri>
+    <target.uri xml:id="id_71">EmpleadoProcess/empleadoprocess_client</target.uri>
   </wire>
-  <wire>
-    <source.uri>GestorProcess/iberia_client</source.uri>
-    <target.uri>IberiaProcess/iberiaprocess_client</target.uri>
+  <wire xml:id="id_72">
+    <source.uri xml:id="id_73">GestorProcess/iberia_client</source.uri>
+    <target.uri xml:id="id_74">IberiaProcess/iberiaprocess_client</target.uri>
   </wire>
-  <wire>
-    <source.uri>GestorProcess/vueling_client</source.uri>
-    <target.uri>VuelingProcess/vuelingprocess_client</target.uri>
+  <wire xml:id="id_75">
+    <source.uri xml:id="id_76">GestorProcess/vueling_client</source.uri>
+    <target.uri xml:id="id_77">VuelingProcess/vuelingprocess_client</target.uri>
   </wire>
 </composite>

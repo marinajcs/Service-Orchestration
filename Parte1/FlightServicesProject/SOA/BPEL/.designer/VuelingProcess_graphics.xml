@@ -6,7 +6,7 @@
    <partnerlink_locations>
       <partnerlink name="vuelingprocess_client" x="0" y="537" side="left"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,525,691,173" show_swimlanes="true">
+   <graph_layout viewport="0,0,541,212" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/if/sequence" type="sequence"/>
