@@ -10,7 +10,19 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 -->
 <process name="Gestor" targetNamespace="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Gestor" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:client="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Gestor" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:ui="http://xmlns.oracle.com/soa/designer" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xml:id="id_1"
-         xmlns:ns1="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/VerCantidad">
+         xmlns:ns1="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/VerCantidad"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Comprador"
+         xmlns:ns3="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Vendedor">
 
     <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Gestor" location="../WSDLs/Gestor.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" xml:id="id_2"/>
     <!-- 
@@ -28,6 +40,8 @@
     <partnerLink name="gestor_client" partnerLinkType="client:Gestor" myRole="GestorProvider" xml:id="id_4"/>
     <partnerLink name="vercantidad_client" partnerLinkType="ns1:VerCantidad" partnerRole="VerCantidadProvider"
                  xml:id="id_11"/>
+    <partnerLink name="comprador_client" partnerLinkType="ns2:Comprador" partnerRole="CompradorProvider" xml:id="id_27"/>
+    <partnerLink name="vendedor_client" partnerLinkType="ns3:Vendedor" partnerRole="VendedorProvider" xml:id="id_44"/>
   </partnerLinks>
 
   <!-- 
@@ -44,6 +58,10 @@
     <variable name="outputVariable" messageType="client:GestorResponseMessage" xml:id="id_7"/>
     <variable name="disponible_process_InputVariable" messageType="ns1:VerCantidadRequestMessage" xml:id="id_13"/>
     <variable name="disponible_process_OutputVariable" messageType="ns1:VerCantidadResponseMessage" xml:id="id_14"/>
+    <variable name="comprador_process_InputVariable" messageType="ns2:CompradorRequestMessage" xml:id="id_31"/>
+    <variable name="comprador_process_OutputVariable" messageType="ns2:CompradorResponseMessage" xml:id="id_32"/>
+    <variable name="vendedor_process_InputVariable" messageType="ns3:VendedorRequestMessage" xml:id="id_45"/>
+    <variable name="vendedor_process_OutputVariable" messageType="ns3:VendedorResponseMessage" xml:id="id_46"/>
   </variables>
 
   <!-- 
@@ -62,10 +80,87 @@
         <from xml:id="id_17">$inputVariable.payload/client:producto</from>
         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_18">$disponible_process_InputVariable.payload/ns1:producto</to>
       </copy>
+      <copy xml:id="id_69">
+        <from xml:id="id_70">$inputVariable.payload/client:producto</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_71">$outputVariable.payload/client:producto</to>
+      </copy>
     </assign>
     <invoke name="disponible" xml:id="id_12" partnerLink="vercantidad_client"
             portType="ns1:VerCantidad" operation="process" inputVariable="disponible_process_InputVariable"
             outputVariable="disponible_process_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <if name="If" xml:id="id_19">
+      <documentation xml:id="id_21">
+        <![CDATA[disponible]]>
+      </documentation>
+      <condition xml:id="id_28" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$disponible_process_OutputVariable.payload/ns1:disponibilidad = 'true'</condition>
+      <sequence name="Sequence1" xml:id="id_29">
+        <assign name="AssignPrecioOriginal" xml:id="id_23">
+          <copy xml:id="id_33">
+            <from xml:id="id_34">100</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_35">$comprador_process_InputVariable.payload/ns2:precio_original</to>
+          </copy>
+          <copy xml:id="id_66">
+            <from xml:id="id_67">100</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_68">$outputVariable.payload/client:precio_original</to>
+          </copy>
+          <copy xml:id="id_75">
+            <from xml:id="id_76">100</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_77">$comprador_process_InputVariable.payload/ns2:precio_ofrecido</to>
+          </copy>
+        </assign>
+        <while name="While_inaceptable" xml:id="id_36">
+          <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_37">$comprador_process_OutputVariable.payload/ns2:aceptable = 'false'  or $comprador_process_InputVariable.payload/ns2:precio_original = $comprador_process_InputVariable.payload/ns2:precio_ofrecido </condition>
+          <sequence name="Sequence2" xml:id="id_38">
+            <invoke name="comprador" xml:id="id_78" partnerLink="comprador_client" portType="ns2:Comprador"
+                    operation="process" inputVariable="comprador_process_InputVariable"
+                    outputVariable="comprador_process_OutputVariable" bpelx:invokeAsDetail="no"/>
+            <if name="If" xml:id="id_39">
+              <documentation xml:id="id_42">
+                <![CDATA[aceptable]]>
+              </documentation>
+              <condition xml:id="id_41">$comprador_process_OutputVariable.payload/ns2:aceptable = 'true'</condition>
+              <assign name="AssignÉxito" xml:id="id_52">
+                <copy xml:id="id_53">
+                  <from xml:id="id_54">'La compra fue realizada con éxito'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_55">$outputVariable.payload/client:mensaje</to>
+                </copy>
+                <copy xml:id="id_60">
+                  <from xml:id="id_61">$comprador_process_InputVariable.payload/ns2:precio_ofrecido</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_62">$outputVariable.payload/client:precio_final</to>
+                </copy>
+              </assign>
+              <else xml:id="id_40">
+                <sequence name="Sequence3" xml:id="id_47">
+                  <assign name="AssignOferta" xml:id="id_48">
+                    <copy xml:id="id_49">
+                      <from xml:id="id_50">$comprador_process_InputVariable.payload/ns2:precio_ofrecido</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_51">$vendedor_process_InputVariable.payload/ns3:oferta</to>
+                    </copy>
+                  </assign>
+                  <invoke name="vendedor" xml:id="id_43" partnerLink="vendedor_client" portType="ns3:Vendedor"
+                          operation="process" inputVariable="vendedor_process_InputVariable"
+                          outputVariable="vendedor_process_OutputVariable" bpelx:invokeAsDetail="no"/>
+                  <assign name="AssignContraoferta" xml:id="id_56">
+                    <copy xml:id="id_57">
+                      <from xml:id="id_58">$vendedor_process_OutputVariable.payload/ns3:contraoferta</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_59">$comprador_process_InputVariable.payload/ns2:precio_ofrecido</to>
+                    </copy>
+                  </assign>
+                </sequence>
+              </else>
+            </if>
+          </sequence>
+        </while>
+      </sequence>
+      <else xml:id="id_20">
+        <assign name="AssignNoHay" xml:id="id_22">
+          <copy xml:id="id_24">
+            <from xml:id="id_25">'No se ha encontrado el producto'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_26">$outputVariable.payload/client:mensaje</to>
+          </copy>
+        </assign>
+      </else>
+    </if>
     <!-- Generate reply to synchronous request -->
     <reply name="replyOutput" partnerLink="gestor_client" portType="client:Gestor" operation="process" variable="outputVariable" xml:id="id_10"/>
   </sequence>

@@ -1,13 +1,2 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Faults>
-   <Fault>
-      <severity>error</severity>
-      <loc>/ns:composite/ns:reference[@name='Gestor/vercantidad_client']</loc>
-      <line/>
-      <col/>
-      <file>C:\Jdeveloper\mywork\ShoppingService\ShoppingServiceProject\SOA\composite.xml</file>
-      <name>C:\Jdeveloper\mywork\ShoppingService\ShoppingServiceProject\SOA\composite.xml</name>
-      <fix/>
-      <msg>La referencia Gestor/vercantidad_client no existe como destino de transmisión</msg>
-   </Fault>
-</Faults>
+<Faults/>

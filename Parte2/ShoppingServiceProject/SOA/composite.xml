@@ -86,6 +86,14 @@
         <interface.wsdl interface="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/VerCantidad#wsdl.interface(VerCantidad)"
                         xml:id="id_57"/>
       </reference>
+      <reference name="comprador_client" ui:wsdlLocation="WSDLs/Comprador.wsdl" xml:id="id_58">
+        <interface.wsdl interface="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Comprador#wsdl.interface(Comprador)"
+                        xml:id="id_59"/>
+      </reference>
+      <reference name="vendedor_client" ui:wsdlLocation="WSDLs/Vendedor.wsdl" xml:id="id_60">
+        <interface.wsdl interface="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Vendedor#wsdl.interface(Vendedor)"
+                        xml:id="id_61"/>
+      </reference>
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false" xml:id="id_55">required</property>
   </component>
@@ -104,5 +112,17 @@
   <wire xml:id="id_52">
     <source.uri xml:id="id_53">gestor_client_ep</source.uri>
     <target.uri xml:id="id_54">Gestor/gestor_client</target.uri>
+  </wire>
+  <wire xml:id="id_62">
+    <source.uri xml:id="id_63">Gestor/vercantidad_client</source.uri>
+    <target.uri xml:id="id_64">VerCantidad/vercantidad_client</target.uri>
+  </wire>
+  <wire xml:id="id_65">
+    <source.uri xml:id="id_66">Gestor/comprador_client</source.uri>
+    <target.uri xml:id="id_67">Comprador/comprador_client</target.uri>
+  </wire>
+  <wire xml:id="id_68">
+    <source.uri xml:id="id_69">Gestor/vendedor_client</source.uri>
+    <target.uri xml:id="id_70">Vendedor/vendedor_client</target.uri>
   </wire>
 </composite>
