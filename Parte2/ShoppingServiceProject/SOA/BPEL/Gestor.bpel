@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Nov 11 12:11:35 CET 2024
+  Author:  marin
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="Gestor" targetNamespace="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Gestor" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:client="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Gestor" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:ui="http://xmlns.oracle.com/soa/designer" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xml:id="id_1"
+         xmlns:ns1="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/VerCantidad">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/ShoppingService/ShoppingServiceProject/Gestor" location="../WSDLs/Gestor.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" xml:id="id_2"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks xml:id="id_3">
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="gestor_client" partnerLinkType="client:Gestor" myRole="GestorProvider" xml:id="id_4"/>
+    <partnerLink name="vercantidad_client" partnerLinkType="ns1:VerCantidad" partnerRole="VerCantidadProvider"
+                 xml:id="id_11"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables xml:id="id_5">
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:GestorRequestMessage" xml:id="id_6"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:GestorResponseMessage" xml:id="id_7"/>
+    <variable name="disponible_process_InputVariable" messageType="ns1:VerCantidadRequestMessage" xml:id="id_13"/>
+    <variable name="disponible_process_OutputVariable" messageType="ns1:VerCantidadResponseMessage" xml:id="id_14"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" xml:id="id_8">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in Gestor.wsdl) -->
+    <receive name="receiveInput" partnerLink="gestor_client" portType="client:Gestor" operation="process" variable="inputVariable" createInstance="yes" xml:id="id_9"/>
+    <assign name="AssignNombre" xml:id="id_15">
+      <copy xml:id="id_16">
+        <from xml:id="id_17">$inputVariable.payload/client:producto</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0" xml:id="id_18">$disponible_process_InputVariable.payload/ns1:producto</to>
+      </copy>
+    </assign>
+    <invoke name="disponible" xml:id="id_12" partnerLink="vercantidad_client"
+            portType="ns1:VerCantidad" operation="process" inputVariable="disponible_process_InputVariable"
+            outputVariable="disponible_process_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="gestor_client" portType="client:Gestor" operation="process" variable="outputVariable" xml:id="id_10"/>
+  </sequence>
+</process>
