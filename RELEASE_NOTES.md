@@ -1,6 +1,6 @@
 # Release Notes
 
-Fecha de subida: 11/11/2024
+Fecha de subida: 12/11/2024
 
 ## Instrucciones de despliegue
 
